@@ -1,0 +1,13 @@
+<!--
+ - Created by Adelchi on 22/03/2018.
+ -->
+
+<apex:page id="MedicWebForm" controller="MedicWebFormCtrl">
+
+ <apex:repeat value="{!listOfFields}" var="field">
+ {!field}<br></br>
+ </apex:repeat>
+
+    <apex:detail />
+
+</apex:page>
