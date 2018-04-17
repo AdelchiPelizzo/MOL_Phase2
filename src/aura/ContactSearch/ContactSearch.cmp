@@ -1,0 +1,86 @@
+<!--
+ - Created by Adelchi on 24/12/2017.
+ -->
+
+<aura:component description="ContactSearch" controller="ContactSearchCtrl" implements="forceCommunity:searchInterface,flexipage:availableForRecordHome,force:hasRecordId,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" access="global" >
+    <style>
+        .header {
+            background-color: coral;
+            color: white;
+            padding: 0.3em;
+
+        }
+        .tooltip{
+            background-color: orangered;
+            color:white;
+        }
+        .tooltip :hover{
+            background-color: orange;
+        }
+    </style>
+    <aura:attribute name="contactList" type="Contact[]"/>
+    <aura:attribute name="contactName" type="String" />
+    <aura:attribute name="birthdate" type="String" />
+    <aura:attribute name="converted-birthdate" type="String" />
+    <aura:handler name="change" value="{!v.birthdate}" action="{!c.doInit}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="recordId" type="String" />
+        <div class="slds-grid slds-wrap slds-m-around--xx-large">
+            <div class="slds-size_1-of-7">
+            </div>
+            <div class="slds-size_2-of-7">
+                <lightning:helptext content="Start typing to Filter Contacts by Name" iconName="action:question_post_action"/>
+                <ui:inputText placeholder="Search Name" value="{!v.contactName}" label="Name" aura:id="contact" keyup="{!c.doInit}"/>
+            </div>
+            <div class="slds-size_1-of-7">
+            </div>
+            <div class="slds-size_2-of-7">
+                <lightning:helptext content="Click on the icon to filter by DOB - Greater or Equal" iconName="utility:help"/>
+                <ui:inputDate aura:id="date" label="Date of birth" value="{!v.birthdate}" displayDatePicker="true" keyup="{!c.doInit}" />
+            </div>
+            <div class="slds-size_1-of-7">
+            </div>
+        </div>
+    <table class="slds-table slds-table--bordered slds-table--cell-buffer">
+            <thead >
+            <tr class="slds-text-heading_medium " >
+                <th scope="col" >
+                    <div class="slds-truncate header"  title="Name">Name</div>
+                </th>
+                <th scope="col">
+                    <div  class="slds-truncate header" title="Name">Date of Birth</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate header" title="Outcome">Occupation Title</div>
+                </th>
+                <th scope="col">
+                    <div class="slds-truncate header"  title="Status">Job Title</div>
+                </th>
+                <th scope="col" >
+                    <div class="slds-truncate header" title="Stage">Company</div>
+                </th>
+            </tr>
+            </thead>
+        <tbody >
+        <aura:iteration items="{!v.contactList}" var="cont">
+            <tr >
+                <td data-label="Name" scope="row" >
+                    <a onclick="{!c.navigate}" data-value="{!cont.Id}"><div class="slds-truncate" >  {!cont.Name} </div></a>
+                </td>
+                <td data-label="Birth Date" scope="row" >
+                    <ui:outputDate class="slds-truncate" aura:id="birthdate" value="{!cont.Birthdate}"></ui:outputDate>
+                </td>
+                <td data-label="Birth Date" scope="row" >
+                    <div class="slds-truncate" >  {!cont.OccupationTitle__c} </div>
+                </td>
+                <td data-label="Birth Date" scope="row" >
+                    <div class="slds-truncate" >  {!cont.Title} </div>
+                </td>
+                <td data-label="Birth Date" scope="row" >
+                    <div class="slds-truncate" >  {!cont.Account.Name} </div>
+                </td>
+            </tr>
+        </aura:iteration>
+        </tbody>
+    </table>
+</aura:component>
