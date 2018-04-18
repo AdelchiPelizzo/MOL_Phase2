@@ -19,6 +19,7 @@
     <aura:attribute name="consQty" type="Integer"/>
     <aura:attribute name="consBatchNr" type="String"/>
     <aura:attribute name="consExpirationDate" type="String"/>
+    <aura:attribute name="removalReason" type="String"/>
 
 
     <force:recordData aura:id="InventoryRecordCreator"
@@ -99,7 +100,7 @@
                             <ui:inputNumber label="Quantity" format=".0" value="{!v.InventoryQty}" updateOn="keyup"/>
                         </div>
                         <div class="slds-box">
-                            <ui:inputText label="Batch Number" value="{!v.BatchNr}" updateOn="change"/>
+                            <ui:inputText label="Removal Reason" value="{!v.removalReason}" updateOn="change"/>
                         </div>
                         <div class="slds-box">
                             <ui:inputDate displayDatePicker="true" label="Expiration Date" value="{!v.ExpirationDate}" updateOn="change" format="dd-MM-yyyy"/>
@@ -125,7 +126,7 @@
                             <ui:inputNumber label="Quantity" format=".0" value="{!v.InventoryQty}" updateOn="keyup"/>
                         </div>
                         <div class="slds-box">
-                            <ui:inputText label="Batch Number" value="{!v.BatchNr}" updateOn="change"/>
+                            <ui:inputText label="Removal Reason" value="{!v.removalReason}" updateOn="change"/>
                         </div>
                         <div class="slds-box">
                             <ui:inputDate displayDatePicker="true" label="Expiration Date" value="{!v.ExpirationDate}" updateOn="change" format="dd-MM-yyyy"/>

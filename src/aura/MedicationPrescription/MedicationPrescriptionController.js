@@ -42,6 +42,7 @@
         $A.enqueueAction(action);
         component.set("v.simpleNewMedication.Consultation__c", component.get("v.recordId"));
         component.set("v.simpleNewMedication.Medication_Name__c", component.get("v.medicationName"));
+        component.set("v.simpleNewMedication.Prescriber__c", component.get("v.selItem2.val"));
         component.find("medicationRecordCreator").saveRecord(function(saveResult) {
             if (saveResult.state === "SUCCESS" || saveResult.state === "DRAFT") {
                 var resultsToast = $A.get("e.force:showToast");

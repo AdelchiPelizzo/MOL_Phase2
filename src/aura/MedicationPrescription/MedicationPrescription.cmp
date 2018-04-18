@@ -8,6 +8,7 @@
     <aura:attribute name="newMedicationError" type="String"/>
     <aura:attribute name="medicationNameList" type="String[]"/>
     <aura:attribute name="medicationName" type="String"/>
+    <aura:attribute name="selItem2" type="object" access="public"/>
     <aura:attribute name="consultationId" type="String" default="{!v.recordId}"/>
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
 
@@ -21,9 +22,21 @@
             <div class="slds-modal__container" style="max-width: 100rem !important; width:100% !important;">
                 <header class="slds-modal__header">
                     <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">New Prescription</h2>
-                    <ui:outputText aura:id="client" value="{!v.recordId}" />
                 </header>
                 <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <div class="slds-form-element">
+                        <div class="slds-form-element__control">
+                            <label>Prescriber</label>
+                            <c:Lookup objectName = "Contact"
+                                      field_API_text = "Name"
+                                      field_API_val = "Id"
+                                      limit = "4"
+                                      field_API_search = "Name"
+                                      lookupIcon = "standard:contact"
+                                      selItem = "{!v.selItem2}"
+                                      placeholder = "Start typing Name ..."/>
+                        </div>
+                    </div>
                     <lightning:input aura:id="medicationField" name="QuantityPrescribed" label="Quantity"
                                      value="{!v.simpleNewMedication.Quantity_Prescribed__c}" required="true"/>
                     <lightning:input aura:id="medicationField" name="PrescribedDose" label="Prescribed Dose"
@@ -40,41 +53,4 @@
             </div>
         </section>
     </div>
-
-    <!--    <div class="slds-modal slds-fade-in-open">
-        <div class="slds-modal__container">
-            <div class="slds-modal__content slds-p-around_medium">
-
-                &lt;!&ndash; Display Lightning Data Service errors &ndash;&gt;
-                <aura:if isTrue="{!not(empty(v.newMedicationError))}">
-                    <div class="recordError">
-                        <ui:message title="Error" severity="error" closable="true">
-                                {!v.newMedicationError}
-                        </ui:message>
-                    </div>
-                </aura:if>
-
-                &lt;!&ndash; Display the new medication form &ndash;&gt;
-                <div class="slds-form_stacked">
-                    <lightning:input aura:id="medicationField" name="MedicationName" label="Name"
-                                     value="{!v.simpleNewMedication.Medication_Name__c}" required="true"/>
-
-                    <lightning:input aura:id="medicationField" name="QuantityPrescribed" label="Quantity"
-                                     value="{!v.simpleNewMedication.Quantity_Prescribed__c}" required="true"/>
-
-                    <lightning:input aura:id="medicationField" name="PrescribedDose" label="Prescribed Dose"
-                                     value="{!v.simpleNewMedication.Prescribed_Dose__c}" />
-                </div>
-
-
-
-            &lt;!&ndash;</div>&ndash;&gt;
-
-            <footer class="slds-modal__footer">
-                <lightning:button label="Save Medication" onclick="{!c.handleSaveContact}" variant="brand" class="slds-m-top_medium"/>
-            </footer>
-            &lt;!&ndash;</div>&ndash;&gt;
-            </div>
-        </div>
-    </div>-->
 </aura:component>
